@@ -3,10 +3,10 @@ import { findDOMNode } from 'react-dom';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 
-import { Tasks } from '../api/tasks.js';
+import { Tasks } from '../api/tasks/tasks';
+import { insert } from '../api/tasks/methods';
 
 import Task from './Task.js';
-import AccountsUIWrapper from './AccountsUIWrapper.js';
 
 // App component - represents the whole app
 class App extends Component {
@@ -31,7 +31,7 @@ class App extends Component {
     
     return filteredTasks.map((task) => {
       const currentUserId = this.props.currentUser && this.props.currentUser._id;
-      const isOwner = task.owner === currentUserId;
+      const isOwner = task.userId === currentUserId;
   
       return (
         <Task
@@ -49,7 +49,9 @@ class App extends Component {
     // Find the text field via the React ref
     const text = findDOMNode(this.refs.textInput).value.trim();
  
-    Meteor.call('tasks.insert', text);
+    insert.call({
+      text
+    });
  
     // Clear form
     findDOMNode(this.refs.textInput).value = '';
@@ -75,8 +77,6 @@ class App extends Component {
             />
             Hide Completed Tasks
           </label>
-
-          <AccountsUIWrapper />
 
           {this.props.currentUser && (
             <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >

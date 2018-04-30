@@ -1,21 +1,28 @@
 import React, { Component } from 'react';
-import { Meteor } from 'meteor/meteor';
 import classnames from 'classnames';
 
-import { Tasks } from '../api/tasks.js';
+import { remove, setChecked, setPrivate } from '../api/tasks/methods';
 
 class Task extends Component {
   toggleChecked() {
     // Set the checked property to the opposite of its current value
-    Meteor.call('tasks.setChecked', this.props.task._id, !this.props.task.checked);
+    setChecked.call({
+      taskId: this.props.task._id,
+      setChecked: !this.props.task.checked
+    });
   }
  
   deleteThisTask() {
-    Meteor.call('tasks.remove', this.props.task._id);
+    remove.call({
+      taskId: this.props.task._id
+    });
   }
 
   togglePrivate() {
-    Meteor.call('tasks.setPrivate', this.props.task._id, ! this.props.task.private,
+    setPrivate.call({
+      taskId: this.props.task._id,
+      setToPrivate: !this.props.task.private
+    },
       () => console.log('toggle private'));
   }
 
