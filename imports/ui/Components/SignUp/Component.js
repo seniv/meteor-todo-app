@@ -8,7 +8,7 @@ import FormWrapper from '../Styled/FormWrapper';
 const SignIn = ({ onSubmit, username, email, password, onChange, submitReady }) => (
   <FormWrapper>
     <form onSubmit={onSubmit}>
-    <StyledHeader>Sign In</StyledHeader>
+    <StyledHeader>Sign Up</StyledHeader>
       <StyledInput
         autoFocus
         name="username"
@@ -31,7 +31,7 @@ const SignIn = ({ onSubmit, username, email, password, onChange, submitReady }) 
         value={password}
         onChange={onChange('password')}
       />
-      <StyledButton disabled={!submitReady} type="submit">Sign In</StyledButton>
+      <StyledButton disabled={!submitReady} type="submit">Sign Up</StyledButton>
     </form>
   </FormWrapper>
 );
