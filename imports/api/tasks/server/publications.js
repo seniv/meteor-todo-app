@@ -5,7 +5,7 @@ Meteor.publish('tasks', function tasksPublication() {
   return Tasks.find({
     $or: [
       { private: { $ne: true } },
-      { userId: this.userId },
+      { createdBy: this.userId },
     ],
   });
 });

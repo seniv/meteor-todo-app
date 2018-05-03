@@ -15,7 +15,7 @@ export const insert = new ValidatedMethod({
  
     Tasks.insert({
       text,
-      userId: this.userId,
+      createdBy: this.userId,
       username: Meteor.users.findOne(this.userId).username,
     });
   }

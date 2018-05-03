@@ -7,7 +7,7 @@ export const Tasks = new Mongo.Collection('tasks');
 
 Tasks.schema = new SimpleSchema({
   text: String,
-  userId: {
+  createdBy: {
     type: String,
     regEx: SimpleSchema.RegEx.Id,
   },
@@ -29,6 +29,6 @@ Tasks.attachSchema(Tasks.schema);
 
 Tasks.helpers({
   editableBy(userId) {
-    return this.userId === userId;
+    return this.createdBy === userId;
   }
 });
