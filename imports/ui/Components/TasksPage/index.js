@@ -4,9 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 
 import { Tasks } from '../../../api/tasks/tasks';
-import { insert } from '../../../api/tasks/methods';
 import Component from './Component';
-import formData from '../../utils/formData';
 import Loader from '../Loader/Component';
 
 const withData = withTracker(() => {
@@ -35,14 +33,6 @@ const enhance = compose(
   withState('hideCompleted', 'setHideCompleted', false),
   withHandlers({
     toggleHideCompleted: ({ setHideCompleted }) => () => setHideCompleted(hideCompleted => !hideCompleted),
-    handleSubmit: () => (event) => {
-      event.preventDefault();
-      const text = formData(event).text.trim();
-      insert.call({
-        text
-      });
-      event.target.reset();
-    }
   }),
   withProps(props => ({ tasks: prepareTasks(props) }))
 );

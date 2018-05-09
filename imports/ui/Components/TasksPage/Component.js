@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Task from '../Task';
+import NewTaskForm from '../NewTaskForm';
 
 const TopPanel = styled.div`
   background: #d2edf4;
@@ -10,8 +11,15 @@ const TopPanel = styled.div`
   position: relative;
 `;
 
-const TasksPage = ({ incompleteCount, hideCompleted, toggleHideCompleted, currentUser, tasks, handleSubmit}) => (
+const TasksPage = ({
+  incompleteCount,
+  hideCompleted,
+  toggleHideCompleted,
+  currentUser,
+  tasks
+}) => (
   <section>
+    {currentUser && <NewTaskForm />}
     <TopPanel>
       <h1>Todo List ({incompleteCount})</h1>
 
@@ -24,16 +32,6 @@ const TasksPage = ({ incompleteCount, hideCompleted, toggleHideCompleted, curren
         />
         Hide Completed Tasks
       </label>
-
-      {currentUser && (
-        <form className="new-task" onSubmit={handleSubmit} >
-          <input
-            name="text"
-            type="text"
-            placeholder="Type to add new tasks"
-          />
-        </form>
-      )}
     </TopPanel>
     <ul>
       {tasks.map((task) => {
