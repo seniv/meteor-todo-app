@@ -10,12 +10,12 @@ const enhance = compose(
     text: { validate: value => value.length > 2 }
   }),
   withHandlers({
-    handleSubmit: ({ text, onChange }) => (event) => {
+    handleSubmit: ({ text, onClear }) => (event) => {
       event.preventDefault();
       insert.call({
         text
       });
-      onChange('text')({ target: { value: ''}});
+      onClear();
     }
   })
 );
