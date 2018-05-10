@@ -3,12 +3,25 @@ import styled from 'styled-components';
 
 import Task from '../Task';
 import NewTaskForm from '../NewTaskForm';
+import StyledButton from '../Styled/Button';
+import SwitchWithText from '../SwitchInput/WithText';
 
 const TopPanel = styled.div`
-  background: #d2edf4;
-  background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
-  padding: 20px 15px 15px 15px;
-  position: relative;
+  background: #e6e6e6;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const TodoH1 = styled.h1`
+  margin: 0;
+`;
+
+const ListWrapper = styled.ul`
+  margin: 0;
+  padding: 0;
+  background: white;
 `;
 
 const TasksPage = ({
@@ -21,19 +34,13 @@ const TasksPage = ({
   <section>
     {currentUser && <NewTaskForm />}
     <TopPanel>
-      <h1>Todo List ({incompleteCount})</h1>
+      <TodoH1>Todo List ({incompleteCount})</TodoH1>
 
-      <label className="hide-completed">
-        <input
-          type="checkbox"
-          readOnly
-          checked={hideCompleted}
-          onClick={toggleHideCompleted}
-        />
-        Hide Completed Tasks
-      </label>
+      <SwitchWithText checked={!hideCompleted} onChange={toggleHideCompleted}>
+        Show Completed
+      </SwitchWithText>
     </TopPanel>
-    <ul>
+    <ListWrapper>
       {tasks.map((task) => {
         const currentUserId = currentUser && currentUser._id;
         const isOwner = task.createdBy === currentUserId;
@@ -46,7 +53,7 @@ const TasksPage = ({
           />
         )
       })}
-    </ul>
+    </ListWrapper>
   </section>
 )
 
