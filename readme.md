@@ -10,7 +10,7 @@ methods
 4. Added `aldeed:collection2` package for applying validation-schemas to collections
 5. Added `dburles:collection-helpers` package for apply helper-methods to collections
 6. Added npm packages `recompose`, `react-router-dom`, `custom-hoc`, `styled-components`, for React-Client,
-7. Client rewrited as SPA-App
+7. Client rewrited as SPA
 
 ## Run this app
 1. Make sure you have installed [Meteor](https://www.meteor.com/install)
